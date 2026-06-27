@@ -9,6 +9,26 @@ A Chrome extension that adds floating `Start`, `End`, and `Stop` buttons to page
 3. Click `Load unpacked`.
 4. Select this folder: `/Users/thi/Downloads/segment_videos`.
 
+## Install From GitHub Actions ZIP
+
+The GitHub Actions workflow builds a ZIP artifact named `video-segment-timestamp-capture`.
+
+1. Open the repository on GitHub.
+2. Go to `Actions`.
+3. Open the latest `Build Extension ZIP` workflow run.
+4. Download the `video-segment-timestamp-capture` artifact.
+5. Unzip the downloaded artifact.
+6. Open `chrome://extensions`.
+7. Enable `Developer mode`.
+8. Click `Load unpacked`.
+9. Select the unzipped `video-segment-timestamp-capture` folder.
+
+Chrome cannot load the ZIP file directly with `Load unpacked`; unzip it first, then select the extracted folder.
+
+## Logo
+
+The extension includes a simple dog emoji logo in `icons/`, with PNG sizes referenced by `manifest.json` and an editable SVG source at `icons/logo.svg`.
+
 ## Use
 
 - Click `Start` to capture the current video timestamp as the segment start.
@@ -18,7 +38,7 @@ A Chrome extension that adds floating `Start`, `End`, and `Stop` buttons to page
 - Click `Stop` to show all stored segments as:
 
 ```bash
-VIDEO_URL="https://vdownload-5.sb-cd.com/1/2/12053619-480p.mp4?secure=h72YBOaLeKg_4qZwdvDJ2A,1782601010&m=5&d=4&_tid=12053619"
+VIDEO_URL="https://video-url/video_file.mp4?secure=TOKEN"
 
 SEGMENTS=(
   "14:28-07:05"
@@ -28,3 +48,18 @@ SEGMENTS=(
 ```
 
 The modal includes a `Copy` button for the generated output.
+
+## Download With ffmpeg
+
+This extension does not download or cut video files inside Chrome. To download the selected segments locally, install `ffmpeg`, then use `download_video.sh`.
+
+1. Copy the `VIDEO_URL` and `SEGMENTS` output from the extension.
+2. Open `download_video.sh`.
+3. Replace the fake `VIDEO_URL`, `OUTPUT`, and sample `SEGMENTS` values.
+4. Run:
+
+```bash
+./download_video.sh
+```
+
+The script downloads each segment with `ffmpeg`, merges the temporary segment files into one output video, and removes the temporary files.

@@ -1,0 +1,54 @@
+name: Build Extension ZIP
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-extension-zip:
+    name: Build extension ZIP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate manifest
+        run: python -m json.tool manifest.json > /dev/null
+
+      - name: Verify extension files
+        run: |
+          test -f manifest.json
+          test -f content.js
+          test -f styles.css
+          test -f icons/icon-16.png
+          test -f icons/icon-48.png
+          test -f icons/icon-128.png
+
+      - name: Build ZIP
+        run: |
+          rm -rf dist
+          mkdir -p dist/video-segment-timestamp-capture/icons
+
+          cp manifest.json dist/video-segment-timestamp-capture/
+          cp content.js dist/video-segment-timestamp-capture/
+          cp styles.css dist/video-segment-timestamp-capture/
+          cp icons/icon-16.png dist/video-segment-timestamp-capture/icons/
+          cp icons/icon-48.png dist/video-segment-timestamp-capture/icons/
+          cp icons/icon-128.png dist/video-segment-timestamp-capture/icons/
+
+          cd dist
+          zip -r video-segment-timestamp-capture.zip video-segment-timestamp-capture
+
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-segment-timestamp-capture
+          path: dist/video-segment-timestamp-capture.zip
+          if-no-files-found: error

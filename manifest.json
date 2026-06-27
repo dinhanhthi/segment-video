@@ -3,6 +3,11 @@
   "name": "Video Segment Timestamp Capture",
   "description": "Capture start and end timestamps from the current page video and copy them as SEGMENTS output.",
   "version": "1.0.0",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
   "permissions": ["clipboardWrite"],
   "content_scripts": [
     {
