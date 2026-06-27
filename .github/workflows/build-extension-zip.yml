@@ -34,21 +34,21 @@ jobs:
       - name: Build ZIP
         run: |
           rm -rf dist
-          mkdir -p dist/video-segment-timestamp-capture/icons
+          mkdir -p dist/segment-videos/icons
 
-          cp manifest.json dist/video-segment-timestamp-capture/
-          cp content.js dist/video-segment-timestamp-capture/
-          cp styles.css dist/video-segment-timestamp-capture/
-          cp icons/icon-16.png dist/video-segment-timestamp-capture/icons/
-          cp icons/icon-48.png dist/video-segment-timestamp-capture/icons/
-          cp icons/icon-128.png dist/video-segment-timestamp-capture/icons/
+          cp manifest.json dist/segment-videos/
+          cp content.js dist/segment-videos/
+          cp styles.css dist/segment-videos/
+          cp icons/icon-16.png dist/segment-videos/icons/
+          cp icons/icon-48.png dist/segment-videos/icons/
+          cp icons/icon-128.png dist/segment-videos/icons/
 
           cd dist
-          zip -r video-segment-timestamp-capture.zip video-segment-timestamp-capture
+          zip -r segment-videos.zip segment-videos
 
       - name: Upload ZIP artifact
         uses: actions/upload-artifact@v4
         with:
-          name: video-segment-timestamp-capture
-          path: dist/video-segment-timestamp-capture.zip
+          name: segment-videos
+          path: dist/segment-videos.zip
           if-no-files-found: error

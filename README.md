@@ -21,17 +21,17 @@
 
 ## Install From GitHub Actions ZIP
 
-The GitHub Actions workflow builds a ZIP artifact named `video-segment-timestamp-capture`.
+The GitHub Actions workflow builds a ZIP artifact named `segment-videos`.
 
 1. Open the repository on GitHub.
 2. Go to `Actions`.
 3. Open the latest `Build Extension ZIP` workflow run.
-4. Download the `video-segment-timestamp-capture` artifact.
+4. Download the `segment-videos` artifact.
 5. Unzip the downloaded artifact.
 6. Open `chrome://extensions`.
 7. Enable `Developer mode`.
 8. Click `Load unpacked`.
-9. Select the unzipped `video-segment-timestamp-capture` folder.
+9. Select the unzipped `segment-videos` folder.
 
 Chrome cannot load the ZIP file directly with `Load unpacked`; unzip it first, then select the extracted folder.
 
