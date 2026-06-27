@@ -8,7 +8,8 @@
   const state = {
     pendingStart: null,
     segments: [],
-    drag: null
+    drag: null,
+    activeVideo: null
   };
 
   const root = document.createElement("div");
@@ -331,6 +332,10 @@
   const modal = shadow.querySelector(".svc-modal-backdrop");
   const copyButton = shadow.querySelector('[data-action="copy"]');
 
+  function isValidVideoCandidate(video) {
+    return Boolean(video?.isConnected && Number.isFinite(video.currentTime));
+  }
+
   function getCandidateVideos() {
     return Array.from(document.querySelectorAll("video"))
       .filter((video) => Number.isFinite(video.currentTime))
@@ -340,18 +345,23 @@
         const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
         const visibleArea = visibleWidth * visibleHeight;
         const readyScore = video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA ? 1 : 0;
-        const playingScore = !video.paused && !video.ended ? 1 : 0;
 
         return {
           video,
-          score: playingScore * 1000000000 + readyScore * 1000000 + visibleArea
+          score: readyScore * 1000000 + visibleArea
         };
       })
       .sort((a, b) => b.score - a.score);
   }
 
   function getCurrentVideo() {
-    return getCandidateVideos()[0]?.video ?? null;
+    if (isValidVideoCandidate(state.activeVideo)) {
+      return state.activeVideo;
+    }
+
+    const video = getCandidateVideos()[0]?.video ?? null;
+    state.activeVideo = video;
+    return video;
   }
 
   function formatTimestamp(seconds) {

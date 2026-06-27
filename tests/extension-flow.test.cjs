@@ -120,6 +120,39 @@ function assertEqual(actual, expected, label) {
     if (!panelText.includes("1. 08:05-10:54")) {
       throw new Error(`Stored segment panel did not show the remaining segment.\n${panelText}`);
     }
+
+    await page.setContent(`
+      <!doctype html>
+      <html>
+        <body>
+          <main style="padding: 40px">
+            <video id="demo-video" src="${videoUrl}" style="width: 640px; height: 360px"></video>
+            <video id="decoy-video" src="${videoUrl}" autoplay muted loop style="width: 1px; height: 1px"></video>
+          </main>
+        </body>
+      </html>
+    `);
+
+    await page.evaluate(() => {
+      const video = document.querySelector("#demo-video");
+      let time = 0;
+      Object.defineProperty(video, "currentTime", {
+        configurable: true,
+        get: () => time,
+        set: (value) => {
+          time = value;
+        }
+      });
+      video.pause();
+      video.currentTime = 321;
+    });
+
+    await page.addScriptTag({ content: contentScript });
+    await page.locator('button[data-action="start"]').click();
+    panelText = await page.locator(".svc-panel").innerText();
+    if (!panelText.includes("Start captured at 05:21.")) {
+      throw new Error(`Paused video capture should use the main video timestamp.\n${panelText}`);
+    }
   } finally {
     await browser.close();
   }
