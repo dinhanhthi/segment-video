@@ -1,6 +1,16 @@
-# Video Segment Timestamp Capture
+<p align="center">
+  <img src="icons/icon-128.png" alt="Video Segment Timestamp Capture logo" width="96" height="96">
+</p>
 
-A Chrome extension that adds floating `Start`, `End`, and `Stop` buttons to pages with HTML video players.
+<h1 align="center">Video Segment Timestamp Capture</h1>
+
+<p align="center">
+  Capture video timestamps, collect segments, and export ffmpeg-ready ranges from any page with an HTML video player.
+</p>
+
+<p align="center">
+  <strong>Start</strong> · <strong>End</strong> · <strong>Delete</strong> · <strong>Copy</strong>
+</p>
 
 ## Load in Chrome
 
@@ -24,10 +34,6 @@ The GitHub Actions workflow builds a ZIP artifact named `video-segment-timestamp
 9. Select the unzipped `video-segment-timestamp-capture` folder.
 
 Chrome cannot load the ZIP file directly with `Load unpacked`; unzip it first, then select the extracted folder.
-
-## Logo
-
-The extension includes a simple dog emoji logo in `icons/`, with PNG sizes referenced by `manifest.json` and an editable SVG source at `icons/logo.svg`.
 
 ## Use
 
