@@ -14,10 +14,22 @@ jobs:
   build-extension-zip:
     name: Build extension ZIP
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read extension version
+        id: version
+        run: |
+          VERSION=$(python -c "import json; print(json.load(open('manifest.json'))['version'])")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Extension version: $VERSION (tag: v$VERSION)"
 
       - name: Validate manifest
         run: python -m json.tool manifest.json > /dev/null
@@ -44,11 +56,34 @@ jobs:
           cp icons/icon-128.png dist/segment-videos/icons/
 
           cd dist
-          zip -r segment-videos.zip segment-videos
+          zip -r "segment-videos-${{ steps.version.outputs.version }}.zip" segment-videos
+          ln -sf "segment-videos-${{ steps.version.outputs.version }}.zip" segment-videos.zip
 
       - name: Upload ZIP artifact
         uses: actions/upload-artifact@v4
         with:
-          name: segment-videos
+          name: segment-videos-${{ steps.version.outputs.version }}
           path: dist/segment-videos.zip
           if-no-files-found: error
+
+      - name: Check whether release tag already exists
+        id: tag_check
+        if: github.event_name != 'pull_request'
+        run: |
+          git fetch --tags origin
+          if git rev-parse "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Release tag ${{ steps.version.outputs.tag }} already exists; skipping release creation."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create GitHub Release
+        if: github.event_name != 'pull_request' && steps.tag_check.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: Video Segment Timestamp Capture v${{ steps.version.outputs.version }}
+          files: dist/segment-videos-${{ steps.version.outputs.version }}.zip
+          generate_release_notes: true
+          fail_on_unmatched_files: true

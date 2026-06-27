@@ -12,26 +12,20 @@
   <strong>Start</strong> · <strong>End</strong> · <strong>Delete</strong> · <strong>Copy</strong>
 </p>
 
-## Load in Chrome
+## Install From GitHub Release
 
-1. Open `chrome://extensions`.
-2. Enable `Developer mode`.
-3. Click `Load unpacked`.
-4. Select this folder: `/Users/thi/Downloads/segment_videos`.
-
-## Install From GitHub Actions ZIP
-
-The GitHub Actions workflow builds a ZIP artifact named `segment-videos`.
+Each push to `main` with a new `version` in `manifest.json` creates a GitHub Release tagged `v{version}` and attaches `segment-videos-{version}.zip`.
 
 1. Open the repository on GitHub.
-2. Go to `Actions`.
-3. Open the latest `Build Extension ZIP` workflow run.
-4. Download the `segment-videos` artifact.
-5. Unzip the downloaded artifact.
-6. Open `chrome://extensions`.
-7. Enable `Developer mode`.
-8. Click `Load unpacked`.
-9. Select the unzipped `segment-videos` folder.
+2. Go to `Releases`.
+3. Download the latest `segment-videos-{version}.zip` asset.
+4. Unzip the downloaded file.
+5. Open `chrome://extensions`.
+6. Enable `Developer mode`.
+7. Click `Load unpacked`.
+8. Select the unzipped `segment-videos` folder.
+
+Bump `version` in `manifest.json` before merging to `main` when you want a new release. If the tag already exists, the workflow still builds the ZIP artifact but skips creating another release.
 
 Chrome cannot load the ZIP file directly with `Load unpacked`; unzip it first, then select the extracted folder.
 
