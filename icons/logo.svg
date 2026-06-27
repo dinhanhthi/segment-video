@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
-  <title id="title">Video Segment Timestamp Capture logo</title>
-  <desc id="desc">A dog emoji logo for the video segment capture extension.</desc>
+  <title id="title">Segment Videos logo</title>
+  <desc id="desc">A dog emoji logo for the Segment Videos extension.</desc>
   <rect width="128" height="128" rx="28" fill="#2563eb"/>
   <text x="64" y="77" text-anchor="middle" dominant-baseline="middle" font-size="72">🐶</text>
 </svg>

@@ -302,7 +302,7 @@
       <div class="svc-list"></div>
     </section>
 
-    <div class="svc-controls" role="group" aria-label="Video segment timestamp controls">
+    <div class="svc-controls" role="group" aria-label="Segment Videos controls">
       <div class="svc-drag-handle" role="button" tabindex="0" aria-label="Drag controls" title="Drag controls"></div>
       <button class="svc-button" type="button" data-action="start">Start</button>
       <button class="svc-button" type="button" data-action="end">End</button>

@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="icons/icon-128.png" alt="Video Segment Timestamp Capture logo" width="96" height="96">
+  <img src="icons/icon-128.png" alt="Segment Videos logo" width="96" height="96">
 </p>
 
-<h1 align="center">Video Segment Timestamp Capture</h1>
+<h1 align="center">Segment Videos</h1>
 
 <p align="center">
   Capture video timestamps, collect segments, and export ffmpeg-ready ranges from any page with an HTML video player.

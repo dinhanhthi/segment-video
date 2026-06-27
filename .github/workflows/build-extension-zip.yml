@@ -83,7 +83,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.tag }}
-          name: Video Segment Timestamp Capture v${{ steps.version.outputs.version }}
+          name: ${{ steps.version.outputs.tag }}
           files: dist/segment-videos-${{ steps.version.outputs.version }}.zip
           generate_release_notes: true
           fail_on_unmatched_files: true
