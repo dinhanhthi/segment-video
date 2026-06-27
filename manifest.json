@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Video Segment Timestamp Capture",
+  "description": "Capture start and end timestamps from the current page video and copy them as SEGMENTS output.",
+  "version": "1.0.0",
+  "permissions": ["clipboardWrite"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
