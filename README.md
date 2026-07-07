@@ -63,3 +63,45 @@ This extension does not download or cut video files inside Chrome. To download t
 ```
 
 The script downloads each segment with `ffmpeg`, merges the temporary segment files into one output video, and removes the temporary files.
+
+## Development
+
+### Prerequisites
+
+- Google Chrome
+- Node.js 18+ (for Playwright tests)
+- Python 3 (for manifest validation in CI and local builds)
+- `ffmpeg` (only if you use `download_video.sh`)
+
+### Load the extension locally
+
+1. Clone the repository.
+2. Open `chrome://extensions`.
+3. Enable `Developer mode`.
+4. Click `Load unpacked`.
+5. Select the repository root folder.
+
+After changing `content.js`, `styles.css`, or `manifest.json`, click the extension's reload button on `chrome://extensions` to pick up changes.
+
+### Build the extension ZIP locally
+
+```bash
+VERSION=$(python -c "import json; print(json.load(open('manifest.json'))['version'])")
+
+rm -rf dist
+mkdir -p dist/segment-videos/icons
+
+cp manifest.json content.js styles.css dist/segment-videos/
+cp icons/icon-16.png icons/icon-48.png icons/icon-128.png dist/segment-videos/icons/
+
+cd dist
+zip -r "segment-videos-${VERSION}.zip" segment-videos
+```
+
+The output is `dist/segment-videos-{version}.zip`, matching the GitHub Actions release artifact.
+
+### Release a new version
+
+1. Bump `version` in `manifest.json`.
+2. Merge to `main`.
+3. GitHub Actions builds `segment-videos-{version}.zip` and creates release tag `v{version}` if that tag does not already exist.

@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
   <title id="title">Segment Videos logo</title>
-  <desc id="desc">A dog emoji logo for the Segment Videos extension.</desc>
-  <rect width="128" height="128" rx="28" fill="#2563eb"/>
-  <text x="64" y="77" text-anchor="middle" dominant-baseline="middle" font-size="72">🐶</text>
+  <desc id="desc">Video segmentation icon with play button and timeline controls.</desc>
+  <image width="128" height="128" xlink:href="logo.png"/>
 </svg>
