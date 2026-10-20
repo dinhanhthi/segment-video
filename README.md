@@ -12,6 +12,9 @@
   <strong>Start</strong> · <strong>End</strong> · <strong>Delete</strong> · <strong>Copy</strong>
 </p>
 
+> [!WARNING]
+> **This project is archived and no longer maintained.** Use [**SegDown**](https://github.com/dinhanhthi/SegDown) instead: a more complete upgrade of Segment Videos. Its browser extension (Chrome, Chromium, Brave, Edge, Arc and Safari) marks ranges on any video, and the SegDown macOS app downloads only those ranges directly (mp4, HLS and `yt-dlp` pages), with no manual `ffmpeg` script needed.
+
 ## Install From GitHub Release
 
 Each push to `main` with a new `version` in `manifest.json` creates a GitHub Release tagged `v{version}` and attaches `segment-videos-{version}.zip`.
